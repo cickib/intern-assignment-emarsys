@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class DestinationTest {
 
@@ -21,6 +22,12 @@ public class DestinationTest {
     @Test
     public void hasNextDestination_false() {
         assertFalse(destinationX.hasNextDestination());
+    }
+
+    @Test
+    public void hasNextDestination_true() {
+        destinationX.setNextDestination(destinationY);
+        assertTrue(destinationX.hasNextDestination());
     }
 
 }
