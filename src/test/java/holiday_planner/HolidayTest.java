@@ -122,7 +122,7 @@ public class HolidayTest {
     }
 
     @Test
-    public void multipleDestinations_parallelOrder_lastIsOrderless() {
+    public void multipleDestinations_parallelOrdered_lastIsOrderless() {
         destinationW.setNextDestination(destinationU);
         destinationX.setNextDestination(destinationV);
         holiday.addDestination(destinationY);
