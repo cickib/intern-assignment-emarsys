@@ -3,6 +3,9 @@ package holiday_planner;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -70,6 +73,29 @@ public class HolidayTest {
         holiday.planRoute();
 
         assertEquals(1, holiday.getRoute().size());
+    }
+
+    @Test
+    public void multipleDestinations_ordered() {
+        destinationU.setNextDestination(destinationX);
+        destinationX.setNextDestination(destinationZ);
+        destinationZ.setNextDestination(destinationW);
+        destinationW.setNextDestination(destinationV);
+        destinationV.setNextDestination(destinationY);
+
+        holiday.addDestination(destinationU);
+        holiday.addDestination(destinationV);
+        holiday.addDestination(destinationW);
+        holiday.addDestination(destinationZ);
+        holiday.addDestination(destinationX);
+        holiday.addDestination(destinationY);
+
+        holiday.planRoute();
+
+        List<Destination> alphabetDestinations = Arrays.asList(destinationU, destinationX,
+                destinationZ, destinationW, destinationV, destinationY);
+
+        assertEquals(alphabetDestinations, holiday.getRoute());
     }
 
 }
