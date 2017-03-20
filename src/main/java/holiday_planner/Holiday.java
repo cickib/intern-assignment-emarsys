@@ -38,6 +38,12 @@ public class Holiday {
                 route.add(destination);
                 route.add(destination.getNextDestination());
                 singleDestinations.remove(destination.getNextDestination());
+            } else {
+                if (route.contains(destination.getNextDestination())) {
+                    route.add(route.indexOf(destination.getNextDestination()), destination);
+                } else {
+                    route.add(destination);
+                }
             }
         }
 
