@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HolidayTest {
 
@@ -42,6 +43,17 @@ public class HolidayTest {
         holiday.planRoute();
 
         assertEquals(destinationY, holiday.getRoute().get(0));
+    }
+
+    @Test
+    public void multipleDestinations_someOrdered() {
+        destinationZ.setNextDestination(destinationY);
+        holiday.addDestination(destinationX);
+        holiday.addDestination(destinationZ);
+        holiday.addDestination(destinationY);
+        holiday.planRoute();
+
+        assertTrue(holiday.getRoute().indexOf(destinationZ) < holiday.getRoute().indexOf(destinationY));
     }
 
 }
