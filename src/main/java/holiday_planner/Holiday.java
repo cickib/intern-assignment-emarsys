@@ -32,7 +32,10 @@ public class Holiday {
                 Destination::hasNextDestination).distinct().collect(Collectors.toList());
         List<Destination> singleDestinations = destinations.stream().filter(
                 destination -> !destination.hasNextDestination()).distinct().collect(Collectors.toList());
-        
+
+        if (!singleDestinations.isEmpty()) {
+            route.addAll(singleDestinations);
+        }
     }
 
 }
