@@ -22,5 +22,9 @@ public class Destination {
     public void setNextDestination(Destination nextDestination) {
         this.nextDestination = nextDestination;
     }
-    
+
+    public boolean hasNextDestination() {
+        return nextDestination != null;
+    }
+
 }
