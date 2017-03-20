@@ -22,4 +22,10 @@ public class Holiday {
         destinations.add(destination);
     }
 
+    void planRoute() {
+        if (destinations.isEmpty()) {
+            throw new NullPointerException();
+        }
+    }
+
 }
