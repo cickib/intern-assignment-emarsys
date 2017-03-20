@@ -18,4 +18,8 @@ public class Holiday {
         return route;
     }
 
+    void addDestination(Destination destination) {
+        destinations.add(destination);
+    }
+
 }
