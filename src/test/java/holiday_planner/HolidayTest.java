@@ -150,4 +150,18 @@ public class HolidayTest {
         assertEquals(1, Collections.frequency(holiday.getRoute(), destinationW));
     }
 
+    @Test
+    public void multipleDestinations_connectedInCircle_routeContainsEachOnce() {
+        destinationU.setNextDestination(destinationW);
+        destinationW.setNextDestination(destinationZ);
+        destinationZ.setNextDestination(destinationU);
+        holiday.addDestination(destinationZ);
+        holiday.addDestination(destinationU);
+        holiday.addDestination(destinationW);
+
+        holiday.planRoute();
+
+        assertEquals(3, holiday.getRoute().size());
+    }
+
 }
