@@ -98,4 +98,26 @@ public class HolidayTest {
         assertEquals(alphabetDestinations, holiday.getRoute());
     }
 
+    @Test
+    public void multipleDestinations_paralellOrdered() {
+        destinationU.setNextDestination(destinationX);
+        destinationZ.setNextDestination(destinationW);
+        destinationW.setNextDestination(destinationV);
+        destinationV.setNextDestination(destinationY);
+
+        holiday.addDestination(destinationV);
+        holiday.addDestination(destinationW);
+        holiday.addDestination(destinationX);
+        holiday.addDestination(destinationZ);
+        holiday.addDestination(destinationY);
+        holiday.addDestination(destinationU);
+
+        holiday.planRoute();
+
+        List<Destination> alphabetDestinations = Arrays.asList(destinationZ, destinationW, destinationV, destinationY,
+                destinationU, destinationX);
+
+        assertEquals(alphabetDestinations, holiday.getRoute());
+    }
+
 }
