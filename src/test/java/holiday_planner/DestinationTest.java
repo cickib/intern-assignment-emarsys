@@ -35,4 +35,10 @@ public class DestinationTest {
         assertEquals(destinationY.getDestinationName(), destinationX.getNextDestination().getDestinationName());
     }
 
+    @Test
+    public void nextDestinationNameNotMatches() {
+        destinationX.setNextDestination(destinationZ);
+        assertNotEquals(destinationY.getDestinationName(), destinationX.getNextDestination().getDestinationName());
+    }
+    
 }
