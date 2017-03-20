@@ -13,13 +13,20 @@ public class HolidayTest {
     private Destination destinationX;
     private Destination destinationY;
     private Destination destinationZ;
+    private Destination destinationV;
+    private Destination destinationW;
+    private Destination destinationU;
 
     @Before
     public void setUp() throws Exception {
         holiday = new Holiday();
+
         destinationX = new Destination("x");
         destinationY = new Destination("y");
         destinationZ = new Destination("z");
+        destinationV = new Destination("v");
+        destinationW = new Destination("w");
+        destinationU = new Destination("u");
     }
 
     @Test(expected = NullPointerException.class)
@@ -54,6 +61,15 @@ public class HolidayTest {
         holiday.planRoute();
 
         assertTrue(holiday.getRoute().indexOf(destinationZ) < holiday.getRoute().indexOf(destinationY));
+    }
+
+    @Test
+    public void nextDestinationIsSameAsStartingOne_oneDestinationAdded() {
+        destinationU.setNextDestination(destinationU);
+        holiday.addDestination(destinationU);
+        holiday.planRoute();
+
+        assertEquals(1, holiday.getRoute().size());
     }
 
 }
