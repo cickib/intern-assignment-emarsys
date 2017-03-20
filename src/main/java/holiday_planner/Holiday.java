@@ -33,6 +33,14 @@ public class Holiday {
         List<Destination> singleDestinations = destinations.stream().filter(
                 destination -> !destination.hasNextDestination()).distinct().collect(Collectors.toList());
 
+        for (Destination destination : destinationsWithNextOne) {
+            if (singleDestinations.contains(destination.getNextDestination())) {
+                route.add(destination);
+                route.add(destination.getNextDestination());
+                singleDestinations.remove(destination.getNextDestination());
+            }
+        }
+
         if (!singleDestinations.isEmpty()) {
             route.addAll(singleDestinations);
         }
