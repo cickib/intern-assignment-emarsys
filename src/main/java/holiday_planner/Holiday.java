@@ -13,5 +13,9 @@ public class Holiday {
         destinations = new ArrayList<>();
         route = new ArrayList<>();
     }
-    
+
+    public List<Destination> getRoute() {
+        return route;
+    }
+
 }
