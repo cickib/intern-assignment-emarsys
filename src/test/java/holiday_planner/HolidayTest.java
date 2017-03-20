@@ -120,4 +120,19 @@ public class HolidayTest {
         assertEquals(alphabetDestinations, holiday.getRoute());
     }
 
+    @Test
+    public void multipleDestinations_parallelOrder_lastIsOrderless() {
+        destinationW.setNextDestination(destinationU);
+        destinationX.setNextDestination(destinationV);
+        holiday.addDestination(destinationY);
+        holiday.addDestination(destinationV);
+        holiday.addDestination(destinationU);
+        holiday.addDestination(destinationW);
+        holiday.addDestination(destinationX);
+
+        holiday.planRoute();
+
+        assertTrue(holiday.getRoute().indexOf(destinationW) < holiday.getRoute().indexOf(destinationY));
+    }
+
 }
