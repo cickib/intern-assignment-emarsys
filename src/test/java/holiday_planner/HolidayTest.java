@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -133,6 +134,20 @@ public class HolidayTest {
         holiday.planRoute();
 
         assertTrue(holiday.getRoute().indexOf(destinationW) < holiday.getRoute().indexOf(destinationY));
+    }
+
+    @Test
+    public void sameDestinationAddedMultipleTimes_routeContainsOnlyOnce() {
+        destinationU.setNextDestination(destinationW);
+        holiday.addDestination(destinationU);
+        holiday.addDestination(destinationZ);
+        holiday.addDestination(destinationW);
+        holiday.addDestination(destinationW);
+        holiday.addDestination(destinationW);
+
+        holiday.planRoute();
+
+        assertEquals(1, Collections.frequency(holiday.getRoute(), destinationW));
     }
 
 }
