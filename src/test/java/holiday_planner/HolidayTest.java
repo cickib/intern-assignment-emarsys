@@ -10,11 +10,15 @@ public class HolidayTest {
     private Holiday holiday;
 
     private Destination destinationX;
+    private Destination destinationY;
+    private Destination destinationZ;
 
     @Before
     public void setUp() throws Exception {
         holiday = new Holiday();
         destinationX = new Destination("x");
+        destinationY = new Destination("y");
+        destinationZ = new Destination("z");
     }
 
     @Test(expected = NullPointerException.class)
@@ -26,7 +30,18 @@ public class HolidayTest {
     public void oneDestinationAddedToHoliday_routeSizeIsOne() {
         holiday.addDestination(destinationX);
         holiday.planRoute();
+
         assertEquals(1, holiday.getRoute().size());
+    }
+
+    @Test
+    public void multipleDestinations_orderless_firstAddedFirstReturned() {
+        holiday.addDestination(destinationY);
+        holiday.addDestination(destinationX);
+        holiday.addDestination(destinationZ);
+        holiday.planRoute();
+
+        assertEquals(destinationY, holiday.getRoute().get(0));
     }
 
 }
