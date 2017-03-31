@@ -37,11 +37,7 @@ public class Holiday {
             if (nextDestinationsIsSingle(destination)) {
                 sortDestinationsWithSingleNext(destination);
             } else {
-                if (route.contains(destination.getNextDestination())) {
-                    route.add(route.indexOf(destination.getNextDestination()), destination);
-                } else {
-                    route.add(destination);
-                }
+                sortDestinationsWithMultipleNext(destination);
             }
         }
 
@@ -66,6 +62,14 @@ public class Holiday {
         route.add(destination);
         route.add(destination.getNextDestination());
         singleDestinations.remove(destination.getNextDestination());
+    }
+
+    private void sortDestinationsWithMultipleNext(Destination destination) {
+        if (route.contains(destination.getNextDestination())) {
+            route.add(route.indexOf(destination.getNextDestination()), destination);
+        } else {
+            route.add(destination);
+        }
     }
 
 }
