@@ -28,10 +28,8 @@ public class Holiday {
             throw new NullPointerException();
         }
 
-        List<Destination> destinationsWithNextOne = destinations.stream().filter(
-                Destination::hasNextDestination).distinct().collect(Collectors.toList());
-        List<Destination> singleDestinations = destinations.stream().filter(
-                destination -> !destination.hasNextDestination()).distinct().collect(Collectors.toList());
+        List<Destination> destinationsWithNextOne = filterDestinationsByHavingNext(true);
+        List<Destination> singleDestinations = filterDestinationsByHavingNext(false);
 
         for (Destination destination : destinationsWithNextOne) {
             if (singleDestinations.contains(destination.getNextDestination())) {
@@ -50,6 +48,14 @@ public class Holiday {
         if (!singleDestinations.isEmpty()) {
             route.addAll(singleDestinations);
         }
+    }
+
+    private List<Destination> filterDestinationsByHavingNext(boolean hasNext) {
+        return destinations
+                .stream()
+                .filter(destination -> destination.hasNextDestination() == hasNext)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
 }
