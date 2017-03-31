@@ -35,9 +35,7 @@ public class Holiday {
 
         for (Destination destination : destinationsWithNextOne) {
             if (nextDestinationsIsSingle(destination)) {
-                route.add(destination);
-                route.add(destination.getNextDestination());
-                singleDestinations.remove(destination.getNextDestination());
+                sortDestinationsWithSingleNext(destination);
             } else {
                 if (route.contains(destination.getNextDestination())) {
                     route.add(route.indexOf(destination.getNextDestination()), destination);
@@ -63,5 +61,11 @@ public class Holiday {
     private boolean nextDestinationsIsSingle(Destination destination) {
         return singleDestinations.contains(destination.getNextDestination());
     }
-    
+
+    private void sortDestinationsWithSingleNext(Destination destination) {
+        route.add(destination);
+        route.add(destination.getNextDestination());
+        singleDestinations.remove(destination.getNextDestination());
+    }
+
 }
