@@ -9,6 +9,8 @@ public class Holiday {
 
     private List<Destination> destinations;
     private List<Destination> route;
+    private List<Destination> singleDestinations;
+    private List<Destination> destinationsWithNextOne;
 
     public Holiday() {
         destinations = new ArrayList<>();
@@ -28,11 +30,11 @@ public class Holiday {
             throw new NullPointerException();
         }
 
-        List<Destination> destinationsWithNextOne = filterDestinationsByHavingNext(true);
-        List<Destination> singleDestinations = filterDestinationsByHavingNext(false);
+        destinationsWithNextOne = filterDestinationsByHavingNext(true);
+        singleDestinations = filterDestinationsByHavingNext(false);
 
         for (Destination destination : destinationsWithNextOne) {
-            if (singleDestinations.contains(destination.getNextDestination())) {
+            if (nextDestinationsIsSingle(destination)) {
                 route.add(destination);
                 route.add(destination.getNextDestination());
                 singleDestinations.remove(destination.getNextDestination());
@@ -58,4 +60,8 @@ public class Holiday {
                 .collect(Collectors.toList());
     }
 
+    private boolean nextDestinationsIsSingle(Destination destination) {
+        return singleDestinations.contains(destination.getNextDestination());
+    }
+    
 }
