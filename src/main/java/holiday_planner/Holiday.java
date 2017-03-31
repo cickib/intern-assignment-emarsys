@@ -26,12 +26,7 @@ public class Holiday {
     }
 
     void planRoute() {
-        if (destinations.isEmpty()) {
-            throw new NullPointerException();
-        }
-
-        destinationsWithNextOne = filterDestinationsByHavingNext(true);
-        singleDestinations = filterDestinationsByHavingNext(false);
+        separateDestinations();
 
         for (Destination destination : destinationsWithNextOne) {
             if (nextDestinationsIsSingle(destination)) {
@@ -44,6 +39,15 @@ public class Holiday {
         if (!singleDestinations.isEmpty()) {
             route.addAll(singleDestinations);
         }
+    }
+
+    private void separateDestinations() {
+        if (destinations.isEmpty()) {
+            throw new NullPointerException();
+        }
+
+        destinationsWithNextOne = filterDestinationsByHavingNext(true);
+        singleDestinations = filterDestinationsByHavingNext(false);
     }
 
     private List<Destination> filterDestinationsByHavingNext(boolean hasNext) {
