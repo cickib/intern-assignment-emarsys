@@ -27,18 +27,7 @@ public class Holiday {
 
     void planRoute() {
         separateDestinations();
-
-        for (Destination destination : destinationsWithNextOne) {
-            if (nextDestinationsIsSingle(destination)) {
-                sortDestinationsWithSingleNext(destination);
-            } else {
-                sortDestinationsWithMultipleNext(destination);
-            }
-        }
-
-        if (!singleDestinations.isEmpty()) {
-            route.addAll(singleDestinations);
-        }
+        sortDestinations();
     }
 
     private void separateDestinations() {
@@ -56,6 +45,20 @@ public class Holiday {
                 .filter(destination -> destination.hasNextDestination() == hasNext)
                 .distinct()
                 .collect(Collectors.toList());
+    }
+
+    private void sortDestinations() {
+        for (Destination destination : destinationsWithNextOne) {
+            if (nextDestinationsIsSingle(destination)) {
+                sortDestinationsWithSingleNext(destination);
+            } else {
+                sortDestinationsWithMultipleNext(destination);
+            }
+        }
+
+        if (!singleDestinations.isEmpty()) {
+            route.addAll(singleDestinations);
+        }
     }
 
     private boolean nextDestinationsIsSingle(Destination destination) {
